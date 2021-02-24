@@ -1,11 +1,83 @@
-import React from 'react';
-import { GithubContext } from '../context/context';
-import styled from 'styled-components';
-import { GoRepo, GoGist } from 'react-icons/go';
-import { FiUsers, FiUserPlus } from 'react-icons/fi';
+import React, { useContext } from "react";
+import { GithubContext } from "../context/context";
+import styled from "styled-components";
+import { GoRepo, GoGist } from "react-icons/go";
+import StorageIcon from "@material-ui/icons/Storage";
+import PeopleIcon from "@material-ui/icons/People";
+import GroupAddIcon from "@material-ui/icons/GroupAdd";
+import CodeIcon from "@material-ui/icons/Code";
+import CountUp from "react-countup";
+import { Typography, Grid } from "@material-ui/core";
+import { fade, makeStyles } from "@material-ui/core/styles";
+
+const useStyles = makeStyles((theme) => ({
+  root: {
+    flexGrow: "1",
+  },
+  infoContainer: {
+    marginTop: "10px",
+    marginBottom: "10px",
+  },
+  infoItem: {
+    maxWidth: "230px",
+    padding: "16px 20px",
+    backgroundColor: theme.palette.common.white,
+    borderRadius: "5px",
+    display: "flex",
+  },
+  icon: {
+    width: "48px",
+    borderRadius: "50%",
+  },
+  boldText: {
+    fontWeight: 600,
+  },
+}));
 
 const UserInfo = () => {
-  return <h2>user info component</h2>;
+  const classes = useStyles();
+
+  const { githubUser } = useContext(GithubContext);
+  const { public_repos, followers, following, public_gists } = githubUser;
+
+  const items = [
+    { id: 1, icon: <StorageIcon className="icon" color="primary"></StorageIcon>, label: "repos", value: public_repos },
+    { id: 2, icon: <PeopleIcon className="icon" color="secondary"></PeopleIcon>, label: "followers", value: followers },
+    { id: 3, icon: <GroupAddIcon className="icon" color="action"></GroupAddIcon>, label: "following", value: following },
+    { id: 4, icon: <CodeIcon className="icon" color="error"></CodeIcon>, label: "gists", value: public_gists },
+  ];
+  console.log(public_repos);
+
+  return (
+    <div className={classes.root}>
+      <Grid className={classes.infoContainer} container justify="space-evenly">
+        {items.map((item) => {
+          return <Item key={item.id} {...item}></Item>;
+        })}
+      </Grid>
+    </div>
+  );
+};
+const Item = ({ icon, label, value, color }) => {
+  const classes = useStyles();
+
+  return (
+    <Grid item className={classes.infoItem} xs={12} sm={3}>
+      <Grid container justify="center" alignContent="center">
+        <div className={classes.icon}>{icon}</div>
+      </Grid>
+      <Grid item></Grid>
+      <Grid item></Grid>
+      <Grid container direction="column">
+        <Typography variant="h5" className={classes.boldText}>
+          <CountUp duration={3} end={value}></CountUp>
+        </Typography>
+        <Typography variant="subtitle1" color="textSecondary">
+          {label}
+        </Typography>
+      </Grid>
+    </Grid>
+  );
 };
 
 const Wrapper = styled.section`
