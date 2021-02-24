@@ -61,6 +61,23 @@ const UserInfo = () => {
 const Item = ({ icon, label, value, color }) => {
   const classes = useStyles();
 
+  let countDuration = 0;
+  switch (value) {
+    case value < 10:
+      countDuration = 5;
+      break;
+    case 100 > value > 10:
+      countDuration = 3;
+      break;
+    case 1000 > value > 100:
+      countDuration = 3;
+      break;
+    case value >= 1000:
+      countDuration = 5;
+    default:
+      countDuration = 3;
+  }
+
   return (
     <Grid item className={classes.infoItem} xs={12} sm={3}>
       <Grid container justify="center" alignContent="center">
@@ -70,7 +87,7 @@ const Item = ({ icon, label, value, color }) => {
       <Grid item></Grid>
       <Grid container direction="column">
         <Typography variant="h5" className={classes.boldText}>
-          <CountUp duration={3} end={value}></CountUp>
+          <CountUp duration={countDuration} end={value}></CountUp>
         </Typography>
         <Typography variant="subtitle1" color="textSecondary">
           {label}
