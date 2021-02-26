@@ -31,12 +31,16 @@ const FollowersCard = () => {
         {followers.map((follower, index) => {
           const { avatar_url, html_url, login } = follower;
           return (
-            <ListItem key={index}>
+            <ListItem key={index} style={index % 2 ? { background: "#f6f6f6" } : { background: "white" }}>
               <ListItemAvatar>
                 <Avatar src={avatar_url} className={classes.followerAvatar} />
               </ListItemAvatar>
               <ListItemText
-                primary={<Typography variant="subtitle2">{login}</Typography>}
+                primary={
+                  <Typography variant="body2" style={{ fontWeight: 600 }}>
+                    {login}
+                  </Typography>
+                }
                 secondary={
                   <Typography className={classes.followerGithub} variant="caption">
                     <Link href={html_url} color="textSecondary">

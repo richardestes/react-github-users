@@ -25,7 +25,7 @@ const User = () => {
         <Grid item xs={12} sm={6} className={classes.infoItem}>
           <UserCard></UserCard>
         </Grid>
-        <Paper style={{ maxHeight: 315 }} elevation={0}>
+        <Paper style={{ maxHeight: 315, minWidth: 400 }} elevation={0}>
           <Grid item xs={12} sm={6} className={classes.infoItem}>
             <FollowersCard></FollowersCard>
           </Grid>

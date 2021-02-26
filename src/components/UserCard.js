@@ -31,7 +31,9 @@ const useStyles = makeStyles((theme) => ({
   userBio: {
     padding: "20px",
   },
-  userCardHeader: {},
+  followButton: {
+    margin: "10px",
+  },
 }));
 const UserCard = () => {
   const classes = useStyles();
@@ -47,11 +49,15 @@ const UserCard = () => {
       <CardHeader
         className={classes.userCardHeader}
         avatar={<Avatar alt="profile pic" src={avatar_url} />}
-        title={<Typography variant="h5">{name}</Typography>}
+        title={
+          <Typography variant="h5" style={{ fontWeight: 600 }}>
+            {name}
+          </Typography>
+        }
         subheader={`@${twitter_username}`}
         action={
           <ThemeProvider theme={buttonTheme}>
-            <Button variant="outlined" href={html_url} color="primary">
+            <Button variant="outlined" href={html_url} color="primary" className={classes.followButton}>
               Follow
             </Button>
           </ThemeProvider>
@@ -70,7 +76,6 @@ const UserCard = () => {
             <ListItemText
               primary={
                 <Typography variant="caption" color="textSecondary">
-                  {" "}
                   {company}
                 </Typography>
               }
