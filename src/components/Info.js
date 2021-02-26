@@ -15,8 +15,8 @@ const useStyles = makeStyles((theme) => ({
     flexGrow: "1",
   },
   infoContainer: {
-    marginTop: "10px",
-    marginBottom: "10px",
+    marginTop: "20px",
+    marginBottom: "20px",
   },
   infoItem: {
     maxWidth: "230px",
@@ -24,6 +24,7 @@ const useStyles = makeStyles((theme) => ({
     backgroundColor: theme.palette.common.white,
     borderRadius: "5px",
     display: "flex",
+    marginBottom: "20px",
   },
   icon: {
     width: "48px",
